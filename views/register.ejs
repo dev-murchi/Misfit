@@ -1,0 +1,51 @@
+<%- include('./partials/_header') -%>
+<%- include('./partials/_navigation', {pageName: 'register'}) -%>
+
+<div class="back_re">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="title">
+               <h2>register</h2>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<!--  contact -->
+<div id="contact" class="contact">
+    <div class="container">
+       <div class="row">
+          <div class="col-md-8 mx-auto">
+             <form id="registerForm" class="main_form">
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <input class="contactus" placeholder="Name" type="type" name="name" required> 
+                    </div>
+                    <div class="col-md-12 ">
+                        <select name="role" class="contactus" placeholder="Role" required>
+                            <option disabled selected>Select Role</option>
+                            <option value="member">Member</option>
+                            <option value="antrenor">Antrenor</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12">
+                        <input class="contactus" placeholder="Email" type="type" name="email" required> 
+                    </div>
+                    <div class="col-md-12">
+                        <input class="contactus" placeholder="Password" type="pasword" name="password" required>                          
+                    </div>
+                    <div class="col-md-12">
+                        <button class="send_btn" type="button">Register</button>
+                    </div>
+                </div>
+             </form>
+          </div>
+          
+       </div>
+    </div>
+ </div>
+ <!-- end contact -->
+
+<%-include('./partials/_footer')-%>

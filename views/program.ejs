@@ -1,17 +1,17 @@
 <%- include('./partials/_header') -%>
-<%- include('./partials/_navigation',  {pageName: 'gallery'}) -%>
+<%- include('./partials/_navigation',  {pageName: 'programs'}) -%>
 
 <div class="back_re">
    <div class="container">
       <div class="row">
          <div class="col-md-12">
             <div class="title">
-               <h2>Gallery</h2>
+               <h2>Program <%= programID%></h2>
             </div>
          </div>
       </div>
    </div>
 </div>
    
-<%- include('./sections/_gallerySection' , {pageName: 'gallery'}) -%>       
+<%- include('./sections/_aboutSection', {pageName: 'programs'}) -%>      
 <%-include('./partials/_footer')-%>

@@ -7,9 +7,22 @@ exports.getAboutPage = (req, res) => {
 exports.getTrainerPage = (req, res) => {
     res.render('trainer');
 };
-exports.getGalleryPage = (req, res) => {
-    res.render('gallery');
+exports.getProgramsPage = (req, res) => {
+    res.render('programs');
 };
+exports.getProgram = (req, res) => {
+    res.render('program', {
+        pageName: 'programs',
+        programID: req.params.id
+    });
+};
+
 exports.getContactPage = (req, res) => {
     res.render('contact');
+};
+exports.loginPage = (req, res) => {
+    res.render('login');
+};
+exports.registerPage = (req, res) => {
+    res.render('register');
 };

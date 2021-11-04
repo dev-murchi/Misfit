@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
 
-const pageController = require('./controllers/pageController');
+//const pageController = require('./controllers/pageController');
+
+const pageRoute = require('./routes/pageRoute');
+const programRoute = require('./routes/programRoute');
 
 // TEMPLATE ENGINE
 app.set('view engine', 'ejs');
@@ -12,14 +15,9 @@ app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true})); // for parsing application/x-www-form-urlencoded
 
 // ROUTES
-app.get('/', pageController.getHomePage);
-app.get('/about', pageController.getAboutPage);
-app.get('/trainer', pageController.getTrainerPage);
-app.get('/programs', pageController.getProgramsPage);
-app.get('/programs/:id', pageController.getProgram);
-app.get('/contact', pageController.getContactPage);
-app.get('/login', pageController.loginPage);
-app.get('/register', pageController.registerPage);
+
+app.use('/', pageRoute);
+app.use('/programs', programRoute);
 
 
 const PORT = process.env.PORT || 3001;

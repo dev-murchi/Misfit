@@ -1,4 +1,4 @@
-exports.getHomePage = (req, res) => {
+exports.getIndexPage = (req, res) => {
     res.render('index');
 };
 exports.getAboutPage = (req, res) => {
@@ -7,22 +7,12 @@ exports.getAboutPage = (req, res) => {
 exports.getTrainerPage = (req, res) => {
     res.render('trainer');
 };
-exports.getProgramsPage = (req, res) => {
-    res.render('programs');
-};
-exports.getProgram = (req, res) => {
-    res.render('program', {
-        pageName: 'programs',
-        programID: req.params.id
-    });
-};
-
 exports.getContactPage = (req, res) => {
     res.render('contact');
 };
-exports.loginPage = (req, res) => {
+exports.getLoginPage = (req, res) => {
     res.render('login');
 };
-exports.registerPage = (req, res) => {
+exports.getRegisterPage = (req, res) => {
     res.render('register');
 };

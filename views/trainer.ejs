@@ -1,5 +1,5 @@
 <%- include('./partials/_header') -%>
-<%- include('./partials/_navigation' , {pageName: 'trainer'}) -%>
+<%- include('./partials/_navigation' , {pageName: pageName}) -%>
 
 <div class="back_re">
 <div class="container">
@@ -13,5 +13,5 @@
 </div>
 </div>
 
-<%- include('./sections/_trainersSection' , {pageName: 'trainer'}) -%> 
+<%- include('./sections/_trainersSection' , {pageName: 'trainer', trainers: trainers}) -%> 
 <%-include('./partials/_footer')-%>

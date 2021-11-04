@@ -20,8 +20,8 @@ const UserSchema = new Schema({
     },
     role: {
         type: String,
-        enum: ['member', 'antrenor', 'admin'],
-        default: 'student'
+        enum: ['member', 'trainer', 'admin'],
+        default: 'member'
     },
     programs: [{
         type: mongoose.Schema.Types.ObjectId,

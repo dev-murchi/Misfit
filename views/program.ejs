@@ -1,17 +1,56 @@
 <%- include('./partials/_header') -%>
-<%- include('./partials/_navigation',  {pageName: 'programs'}) -%>
+<%- include('./partials/_navigation',  {pageName: pageName}) -%>
 
 <div class="back_re">
    <div class="container">
       <div class="row">
          <div class="col-md-12">
             <div class="title">
-               <h2>Program <%= programID%></h2>
+               <h2><%= program.name%></h2>
             </div>
          </div>
       </div>
    </div>
 </div>
    
-<%- include('./sections/_aboutSection', {pageName: 'programs'}) -%>      
+<div class="about">
+   <div class="container">
+      <div class="row d_flex">
+         <div class="col-md-5">
+            <div class="titlepage">
+               <table class="class="table table-borderless">
+                  <tbody>
+                     <tr>
+                        <th scope="row">ID:</th>
+                        <td><%= program._id%></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Name:</th>
+                        <td><%= program.name%></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Description:</th>
+                        <td><%= program.description%></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Category:</th>
+                        <td><%= program.category%></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Slug:</th>
+                        <td><%= program.slug%></td>
+                      </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <div class="col-md-7">
+            <div class="about_img">
+               <figure><img src="/images/about.jpg" alt="#"/></figure>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+    
 <%-include('./partials/_footer')-%>

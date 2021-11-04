@@ -27,7 +27,7 @@ const ProgramSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Category'
     },
-    user: {
+    trainerID: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'User'
     }

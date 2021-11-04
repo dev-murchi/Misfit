@@ -1,10 +1,11 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
-
-//const pageController = require('./controllers/pageController');
 
 const pageRoute = require('./routes/pageRoute');
 const programRoute = require('./routes/programRoute');
+const categoryRoute = require('./routes/categoryRoute'); 
+const userRoute = require('./routes/userRoute');
 
 // TEMPLATE ENGINE
 app.set('view engine', 'ejs');
@@ -18,10 +19,21 @@ app.use(express.urlencoded({ extended: true})); // for parsing application/x-www
 
 app.use('/', pageRoute);
 app.use('/programs', programRoute);
+app.use('/categories', categoryRoute);
+app.use('/users', userRoute);
 
 
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
-    console.log(`Server is started on port: ${PORT}...`);
+    console.log(`Server is started on port: ${PORT} and connecting to Mongo DB...`);
+    // Conenct DB
+    mongoose.connect('mongodb://localhost/misfit-project-db',{ 
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }).then(() => {
+        console.log('DB Connected Successfully!')
+    }).catch((error) => {
+        console.log(error);
+    });
 });

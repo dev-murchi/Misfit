@@ -42,15 +42,15 @@
       <div class="row">
          <div class="col-sm-12">
             <div class="row">
-               <% for(let i=0; i<6; i++) {%>
+               <% for(let i=0; i < programs.length; i++) {%>
                   <div class="col-sm-6 col-md-4">
                      <div class="gallery_box">
-                        <a class="gallery_img mb-0" href="/programs/<%= i+1%>">
-                           <img src="/images/gallery<%= i+1%>.jpg" alt="Bridge">
+                        <a class="gallery_img mb-0" href="/programs/<%= programs[i].slug%>">
+                           <img src="/images/gallery1.jpg" alt="Bridge">
                         </a>
                         <div class="mt-0 pb-1 pt-1 text-center" style="background: white;">
-                           <h3 class="px-4 mt-2 mb-1">Program <%= i+1%></h3>
-                           <a class="btn btn-outline-primary px-4 mb-2 mt-1" href="/programs/<%= i+1%>">
+                           <h3 class="px-4 mt-2 mb-1"><%= programs[i].name%></h3>
+                           <a class="btn btn-outline-primary px-4 mb-2 mt-1" href="/programs/<%= programs[i].slug%>">
                               <i class="fa fa-search-plus mr-1"></i>INFO
                            </a>
                         </div>

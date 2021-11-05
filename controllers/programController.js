@@ -6,7 +6,8 @@ exports.createProgram = async (req, res) => {
             name: req.body.name,
             description: req.body.description,
             category: req.body.category,
-            trainerID: req.body.trainerID
+            trainerID: req.body.trainerID,
+            recommendedWeek: req.body.recommendedWeek
         });
 
         res.status(201).json({
@@ -33,11 +34,7 @@ exports.getAllPrograms = async (req, res) => {
 };
 exports.getSingleProgramPage = async (req, res) => {
 
-
-    console.log(req.params.slug);
-    console.log('slug: ',req.params.slug);
     const program = await Program.findOne({slug: req.params.slug});
-    console.log(program);
     res.render('program', {
         program: program,
         pageName: 'programs'

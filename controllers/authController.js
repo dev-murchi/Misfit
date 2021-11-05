@@ -6,24 +6,24 @@ exports.createUser = async (req, res) => {
     try{
         const user = await User.create(req.body); 
         
-        // res.status(201).redirect('/login');
-        res.status(201).json({
+        console.log({
             status: 'success',
             user: user
-        })
+        });
+        res.status(201).redirect('/login');
     }
-    catch (error) {
+    catch (err) {
 
         const errors = validationResult(req);
-        let errorMessage = '';
+        const errorMessage = [];
+        errorMessage.push(err.message);
         for (let i = 0; i < errors.array().length; i++) {
-            errorMessage += `${errors.array()[i].msg} `;
+            errorMessage.push(errors.array()[i].msg);
         }
-        // req.flash('error', errorMessage);    
-        // res.status(400).redirect('/register');
-        req.status(400).json({
+        
+        res.status(400).json({
             status: 'failed',
-            user: errorMessage
+            user: JSON.stringify(errorMessage)
         })
 
     }

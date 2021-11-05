@@ -15,6 +15,9 @@ const ProgramSchema = new Schema({
         trim:true,
         required: true  
     },
+    recommendedWeek: {
+        type: Number,
+    },
     dateCreated: {
         type: Date,
         default: Date.now

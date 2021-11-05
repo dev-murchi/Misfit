@@ -18,26 +18,35 @@
     <div class="container">
        <div class="row">
           <div class="col-md-8 mx-auto">
-             <form id="registerForm" class="main_form">
+             <form id="registerForm" class="main_form" method="post" action="/users/signup">
                 <div class="row">
-                    <div class="col-md-12 ">
-                        <input class="contactus" placeholder="Name" type="type" name="name" required> 
-                    </div>
-                    <div class="col-md-12 ">
+                     <div class="col-md-12 ">
+                        <input class="contactus" placeholder="Name" type="text" name="name" required> 
+                     </div>                    
+                     <div class="col-md-12">
+                           <input class="contactus" placeholder="Email" type="email" name="email" required> 
+                     </div>
+                     <div class="col-md-12">
+                           <input class="contactus" placeholder="Password" type="password" name="password" required>                          
+                     </div>
+                     <div class="col-md-12">
+                        <input class="contactus" placeholder="Phone" type="text" name="phone" required> 
+                     </div>
+                     <div class="col-md-12">
+                        <input class="contactus" placeholder="Height in cm" type="number" name="height" required> 
+                     </div>
+                     <div class="col-md-12">
+                        <input class="contactus" placeholder="Weight in kg" type="number" name="weight" required> 
+                     </div>
+                     <div class="col-md-12 ">
                         <select name="role" class="contactus" placeholder="Role" required>
-                            <option disabled selected>Select Role</option>
-                            <option value="member">Member</option>
-                            <option value="antrenor">Antrenor</option>
+                           <option value="">Role:</option>
+                           <option value="member">Member</option>
+                           <option value="trainer">Trainer</option>
                         </select>
-                    </div>
+                     </div>
                     <div class="col-md-12">
-                        <input class="contactus" placeholder="Email" type="type" name="email" required> 
-                    </div>
-                    <div class="col-md-12">
-                        <input class="contactus" placeholder="Password" type="pasword" name="password" required>                          
-                    </div>
-                    <div class="col-md-12">
-                        <button class="send_btn" type="button">Register</button>
+                        <button class="send_btn" type="submit">Register</button>
                     </div>
                 </div>
              </form>

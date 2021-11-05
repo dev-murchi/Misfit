@@ -1,7 +1,7 @@
 <%- include('./partials/_header') -%>
 <%- include('./partials/_navigation',  {pageName: pageName}) -%>
 
-<div class="back_re">
+<% if(program) {%><div class="back_re">
    <div class="container">
       <div class="row">
          <div class="col-md-12">
@@ -33,6 +33,10 @@
                         <td><%= program.description%></td>
                       </tr>
                       <tr>
+                        <th scope="row">Recommended Week:</th>
+                        <td><%= program.recommendedWeek %></td>
+                      </tr>
+                      <tr>
                         <th scope="row">Category:</th>
                         <td><%= program.category%></td>
                       </tr>
@@ -52,5 +56,7 @@
       </div>
    </div>
 </div>
+
+<% } %>
     
 <%-include('./partials/_footer')-%>

@@ -18,12 +18,29 @@ const UserSchema = new Schema({
         type:String,
         required: true
     },
+    height: {
+        type: Number,
+    },
+    weight: {
+        type: Number,
+    },
+    phone: {
+        type: String,
+    },
+    healtProblem: {
+        type: String,
+    },
     role: {
         type: String,
         enum: ['member', 'trainer', 'admin'],
         default: 'member'
     },
-    programs: [{
+    proficiency: {
+        type:mongoose.Schema.Types.ObjectId,
+        ref: 'Proficiency',
+        required: false
+    },
+    enrolledPrograms: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Program'
     }]

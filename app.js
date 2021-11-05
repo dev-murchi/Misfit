@@ -1,5 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+
 const app = express();
 
 const pageRoute = require('./routes/pageRoute');
@@ -8,6 +11,12 @@ const categoryRoute = require('./routes/categoryRoute');
 const userRoute = require('./routes/userRoute');
 const proficiencyRoute = require('./routes/proficiencyRoute');
 
+
+const mongoUrl = 'mongodb://localhost/misfit-project-db';
+
+// Global Variable
+global.userIn = null;
+
 // TEMPLATE ENGINE
 app.set('view engine', 'ejs');
 
@@ -15,6 +24,18 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true})); // for parsing application/x-www-form-urlencoded
+app.use(session({
+    secret: 'my_keyboard_cat',
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({
+        mongoUrl: mongoUrl
+    })
+}));
+app.use('*', (req, res, next) => {
+    userIn = req.session.userID;
+    next();
+});
 
 // ROUTES
 
@@ -30,7 +51,7 @@ const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Server is started on port: ${PORT} and connecting to Mongo DB...`);
     // Conenct DB
-    mongoose.connect('mongodb://localhost/misfit-project-db',{ 
+    mongoose.connect(mongoUrl,{ 
         useNewUrlParser: true,
         useUnifiedTopology: true
     }).then(() => {

@@ -2,7 +2,7 @@ const express = require('express')
 const {body} = require('express-validator');
 
 const authController = require('../controllers/authController');
-//const authMiddleware = requore('../middlewares/authMiddlwware');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 const User = require('../models/User');
 
@@ -23,5 +23,10 @@ router.route('/signup').post(
     ],
     authController.createUser
 );
+
+router.route('/login').post(authController.loginUser);
+router.route('/logout').get(authController.logoutUser);
+// router.route('/dashboard').get(authMiddleware, authController.getDashboardPage);
+router.route('/:id').delete(authController.deleteUser);
 
 module.exports = router;

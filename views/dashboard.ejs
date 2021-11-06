@@ -1,5 +1,5 @@
 <%- include('./partials/_header') -%>
-<%- include('./partials/_navigation', {pageName: 'about'}) -%>
+<%- include('./partials/_navigation', {pageName: 'dashboard'}) -%>
 
 <div class="back_re">
    <div class="container">
@@ -7,6 +7,26 @@
          <div class="col-md-12">
             <div class="title">
                <h2>Dashboard</h2>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="about">
+   <div class="container">
+      <div class="row d_flex">
+         <div class="col-md-5">
+            <div class="titlepage">
+               <%if(user) {%>
+                  <h2><%= user.name%></h2>
+               <%}%>
+               <p><%= message%></p>
+            </div>
+         </div>
+         <div class="col-md-7">
+            <div class="about_img">
+               <figure><img src="/images/about.jpg" alt="#"/></figure>
             </div>
          </div>
       </div>

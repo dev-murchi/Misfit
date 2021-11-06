@@ -36,9 +36,8 @@ const UserSchema = new Schema({
         default: 'member'
     },
     proficiency: {
-        type:mongoose.Schema.Types.ObjectId,
-        ref: 'Proficiency',
-        required: false
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Proficiency'
     },
     enrolledPrograms: [{
         type: mongoose.Schema.Types.ObjectId,

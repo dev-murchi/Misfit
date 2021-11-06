@@ -8,7 +8,7 @@ exports.createUser = async (req, res) => {
     try{
         const user = await User.create(req.body); 
         
-        console.log({
+        console.log('created user: ',{
             status: 'success',
             user: user
         });
@@ -31,14 +31,6 @@ exports.createUser = async (req, res) => {
     }
 };
 
-exports.getDashboardPage = async (req, res) => {
-    
-    res.status(200).render('dashboard', {
-        pageName: 'dashboard', 
-        
-    });
-};
-
 exports.loginUser = async (req, res) => {
     try {
         const {email, password} = req.body;
@@ -50,11 +42,12 @@ exports.loginUser = async (req, res) => {
                 user.password,
                 (err, same) => {
                     if(same){
-                        req.session.userID = user._id;
-                        res.status(200).json({
+                        console.log('logedin user: ', {
                             status: 'success',
                             user: user
                         });
+                        req.session.userID = user._id;
+                        res.status(200).redirect('/users/dashboard');
                     }
                     else {
                         console.error('Invalid user credentials.x');
@@ -95,6 +88,24 @@ exports.deleteUser = async (req, res) => {
         res.status(400).json({
             status: 'failed',
             error: err.message
+        });
+    }
+};
+
+exports.getDashboardPage = async (req, res) => {
+    
+    try {
+        const user = await User.findById(req.session.userID);
+
+        res.status(200).render('dashboard', {
+            pageName: 'dashboard', 
+            user: user, 
+            message: 'Success...'     
+        });
+    } catch (err) {
+        res.status(400).render('dashboard', {
+            pageName: 'dashboard',
+            message: err.message     
         });
     }
 };

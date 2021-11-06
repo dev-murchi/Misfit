@@ -1,7 +1,7 @@
 <!-- gallery -->
 
-<% if(programs) { %>
-   <div  class="gallery" >
+<% if(programs && programs.length !== 0) { %>
+   <div  class="gallery col-md-12" >
       <div class="container">
          <% if(pageName === 'programs') {%>
             <%- include('../partials/_programSearchBar.ejs') -%>
@@ -17,9 +17,17 @@
                            </a>
                            <div class="mt-0 pb-1 pt-1 text-center" style="background: white;">
                               <h3 class="px-4 mt-2 mb-1"><%= programs[i].name%></h3>
-                              <a class="btn btn-outline-primary px-4 mb-2 mt-1" href="/programs/<%= programs[i].slug%>">
-                                 <i class="fa fa-search-plus mr-1"></i>INFO
-                              </a>
+                              <% if(pageName === 'dashboard' && role === 'member') {%>
+                                 <a class="btn btn-danger px-4 mb-2 mt-1 mr-2 ml-2" href="/programs/program-b1"> <i class="fa fa-search-plus mr-1"></i>RELEASE</a>
+                              <% } else if(pageName === 'dashboard' && role === 'trainer') { %>
+                                 <a class="btn btn-warning px-4 mb-2 mt-1 mr-2 ml-2" href="/programs/program-b1"> <i class="fa fa-search-plus mr-1"></i>UPDATE</a>
+                                 <a class="btn btn-danger px-4 mb-2 mt-1 mr-2 ml-2" href="/programs/program-b1"> <i class="fa fa-search-plus mr-1"></i>DELETE</a>
+                              <% } else { %>
+                                 <a class="btn btn-outline-primary px-4 mb-2 mt-1 mr-2 ml-2" href=" /programs/<%= programs[i].slug%>"> <i class="fa fa-search-plus mr-1"></i>INFO</a>
+                              <% } %>
+
+
+
                            </div>
                         </div>
                      </div>

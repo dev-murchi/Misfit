@@ -95,15 +95,18 @@ exports.deleteUser = async (req, res) => {
 exports.getDashboardPage = async (req, res) => {
     
     try {
-        const user = await User.findById(req.session.userID);
-        // const programs = await Program.findById(req.session.userID);
-        const programs = await Program.find();
+        const user = await User.findOne({_id: req.session.userID}).populate('enrolledPrograms');
+        const programs = await Program.find({trainerID: req.session.userID}).sort('-dateCreated');
+        const users = await User.find();
+        console.log('user: ', user);
+        console.log('programs: ', programs);
         res.status(200).render('dashboard', {
             pageName: 'dashboard', 
             user: user, 
-            programs: null
+            programs: programs
         });
     } catch (err) {
+        console.log(err.message);
         res.status(400).render('dashboard', {
             pageName: 'dashboard',
             message: err.message     

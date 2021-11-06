@@ -65,10 +65,12 @@
 
       <div class="row">
          <%if(user.role === 'admin'){%>
-            <%- include('./sections/_programsSection' , {pageName: pageName, programs: programs}) -%>  
+            <%- include('./sections/_programsSection' , {pageName: pageName, programs: programs, role:user.role}) -%>  
+         <%} else if(user.role === 'trainer') {%>
+            <%- include('./sections/_programsSection' , {pageName: pageName, programs: programs, role:user.role}) -%>  
          <%} else {%>
-            <%- include('./sections/_programsSection' , {pageName: pageName, programs: programs}) -%>  
-        <% } %>
+            <%- include('./sections/_programsSection' , {pageName: pageName, programs: user.enrolledPrograms, role:user.roll}) -%>  
+         <% } %>
 
       </div>
        

@@ -1,12 +1,18 @@
 <%- include('./partials/_header') -%>
-<%- include('./partials/_navigation', {pageName: 'dashboard'}) -%>
-
+<%- include('./partials/_navigation', {pageName: pageName}) -%>
+<%if(user) {%>
 <div class="back_re">
    <div class="container">
       <div class="row">
          <div class="col-md-12">
             <div class="title">
-               <h2>Dashboard</h2>
+               <% if(user.role === 'trainer') {%>
+                  <h2>CREATED ROGRAMS</h2>
+               <% } else if (user.role === 'member') { %>
+                  <h2>ENROLLED PROGRAMS</h2>
+               <% } else { %> 
+                  <h2>ADMIN PAGE</h2>
+               <% } %>
             </div>
          </div>
       </div>
@@ -15,22 +21,58 @@
 
 <div class="about">
    <div class="container">
-      <div class="row d_flex">
-         <div class="col-md-5">
-            <div class="titlepage">
-               <%if(user) {%>
-                  <h2><%= user.name%></h2>
-               <%}%>
-               <p><%= message%></p>
-            </div>
-         </div>
-         <div class="col-md-7">
+      <div class="row mb-4">
+         <div class="col-md-4 text-center mb-2 mt-2">
             <div class="about_img">
-               <figure><img src="/images/about.jpg" alt="#"/></figure>
+               <figure><img src="/images/about.jpg" alt="#" class="rounded"/></figure>
             </div>
          </div>
+         <div class="col-md-5 text-center mb-2 mt-2">
+            <div class="titlepage">
+               
+                  <h2><%= user.name%></h2>
+                  <p><b>Role: </b><%= user.role%></p>
+                  <p><b>Email: </b><%= user.email%></p>
+                  <p><b>Phone: </b><%= user.phone%></p>
+               
+            </div>
+         </div>
+         <div class="col-md-3 my-auto">
+            <div class="row">
+
+               <button class="col-md-12 btn btn-lg btn-warning rounded-0 text-white mt-2">
+                  <span>Update Image</span>
+               </button>
+               <button class="col-md-12 btn btn-lg btn-warning rounded-0 text-white mt-2">
+                  <span>Update Info</span>
+               </button>
+               <% if(user.role === 'trainer') {%>
+               <button class="col-md-12 btn btn-lg btn-warning rounded-0 text-white mt-2">
+                  <span>CREATE NEW PROGRAM</span>
+               </button>
+              <%} else if(user.role === 'admin') {%>
+               <button class="col-md-12 btn btn-lg btn-warning rounded-0 text-white mt-2">
+                  <span>Add Category</span>
+               </button>
+               <button class="col-md-12 btn btn-lg btn-warning rounded-0 text-white mt-2">
+                  <span>Add Proficiency</span>
+               </button>
+               <% } %>
+            </div>
+         </div>
+         
       </div>
+
+      <div class="row">
+         <%if(user.role === 'admin'){%>
+            <%- include('./sections/_programsSection' , {pageName: pageName, programs: programs}) -%>  
+         <%} else {%>
+            <%- include('./sections/_programsSection' , {pageName: pageName, programs: programs}) -%>  
+        <% } %>
+
+      </div>
+       
    </div>
 </div>
-
+<%}%>
 <%-include('./partials/_footer')-%>

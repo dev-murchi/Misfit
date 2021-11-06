@@ -96,11 +96,12 @@ exports.getDashboardPage = async (req, res) => {
     
     try {
         const user = await User.findById(req.session.userID);
-
+        // const programs = await Program.findById(req.session.userID);
+        const programs = await Program.find();
         res.status(200).render('dashboard', {
             pageName: 'dashboard', 
             user: user, 
-            message: 'Success...'     
+            programs: null
         });
     } catch (err) {
         res.status(400).render('dashboard', {

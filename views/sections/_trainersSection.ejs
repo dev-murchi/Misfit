@@ -1,29 +1,31 @@
 <!-- trainers -->
-<div  class="trainers">
-   <div class="container">
-      <div class="row">
-         <div class="col-md-12">
-            <div class="titlepage">
-               <h2>Our Trainers</h2>
-               <p>Lorem Ipsum available, but the majority have suffered </p>
-            </div>
-         </div>
-      </div>
-      <div class="row">
-         <% for(let i = 0; i < trainers.length; i++){ %>
-            <div class="col-md-4">
-               <div id="trai" class="trainer_box">
-                  <div class="trainer_img">
-                     <figure><img src="/images/tra.jpg" alt="#"/></figure>
-                  </div>
-                  <div class="trainer">
-                     <h3><%= trainers[i].name%></h3>
-                     <p><%= trainers[i].role%></p>
-                  </div>
+<%if(trainers){%>
+   <div  class="trainers">
+      <div class="container">
+         <div class="row">
+            <div class="col-md-12">
+               <div class="titlepage">
+                  <h2>Our Trainers</h2>
+                  <p>Lorem Ipsum available, but the majority have suffered </p>
                </div>
             </div>
-         <% } %>
+         </div>
+         <div class="row">
+            <% for(let i = 0; i < trainers.length; i++){ %>
+               <div class="col-md-4">
+                  <div id="trai" class="trainer_box">
+                     <div class="trainer_img">
+                        <figure><img src="/images/tra.jpg" alt="#"/></figure>
+                     </div>
+                     <div class="trainer">
+                        <h3><%= trainers[i].name%></h3>
+                        <p><%= trainers[i].role%></p>
+                     </div>
+                  </div>
+               </div>
+            <% } %>
+         </div>
       </div>
    </div>
-</div>
+<%}%>
 <!-- end trainers -->

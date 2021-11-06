@@ -1,4 +1,17 @@
 <%- include('./partials/_header') -%>
 <%- include('./partials/_navigation',  {pageName: pageName}) -%>
-<%- include('./sections/_programsSection' , {pageName: pageName, programs: programs}) -%>       
+<div class="back_re">
+    <div class="container">
+       <div class="row">
+          <div class="col-md-12">
+             <div class="title">
+                <h2>Our Programs</h2>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+<% if(programs) {%>
+   <%- include('./sections/_programsSection' , {pageName: pageName, programs: programs}) -%>     
+<% } %>
 <%-include('./partials/_footer')-%>

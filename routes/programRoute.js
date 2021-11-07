@@ -8,5 +8,9 @@ router.route('/').post(roleMiddleware(['trainer', 'admin']), programController.c
 
 router.route('/').get(programController.getAllPrograms);
 router.route('/:slug').get(programController.getSingleProgramPage);
+router.route('/:slug').delete(programController.deleteProgram);
+router.route('/:slug').put(programController.updateProgram);
+router.route('/enroll').post(programController.enrollProgram);
+router.route('/release').post(programController.releaseProgram);
 
 module.exports = router;

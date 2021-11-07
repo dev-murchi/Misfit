@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const methodOverride = require('method-override');
 
 const app = express();
 
@@ -12,7 +13,7 @@ const userRoute = require('./routes/userRoute');
 const proficiencyRoute = require('./routes/proficiencyRoute');
 
 
-const mongoUrl = 'mongodb://localhost/misfit-project-db';
+const mongoUrl = 'mongodb://localhost/misfit-project-db2';
 
 // Global Variable
 global.userIn = null;
@@ -36,6 +37,9 @@ app.use('*', (req, res, next) => {
     userIn = req.session.userID;
     next();
 });
+app.use(methodOverride('_method', {
+    methods: ['GET', 'POST']
+}));
 
 // ROUTES
 

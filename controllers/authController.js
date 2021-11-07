@@ -98,12 +98,13 @@ exports.getDashboardPage = async (req, res) => {
         const user = await User.findOne({_id: req.session.userID}).populate('enrolledPrograms');
         const programs = await Program.find({trainerID: req.session.userID}).sort('-dateCreated');
         const users = await User.find();
-        console.log('user: ', user);
-        console.log('programs: ', programs);
+        const categories = await Category.find();
+        
         res.status(200).render('dashboard', {
             pageName: 'dashboard', 
             user: user, 
-            programs: programs
+            programs: programs,
+            categories: categories
         });
     } catch (err) {
         console.log(err.message);

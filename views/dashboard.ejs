@@ -47,7 +47,7 @@
                   <span>Update Info</span>
                </button>
                <% if(user.role === 'trainer') {%>
-               <button class="col-md-12 btn btn-lg btn-warning rounded-0 text-white mt-2">
+               <button class="col-md-12 btn btn-lg btn-warning rounded-0 text-white mt-2" data-toggle="modal" data-target="#createProgramModal">
                   <span>CREATE NEW PROGRAM</span>
                </button>
               <%} else if(user.role === 'admin') {%>
@@ -69,7 +69,7 @@
          <%} else if(user.role === 'trainer') {%>
             <%- include('./sections/_programsSection' , {pageName: pageName, programs: programs, role:user.role}) -%>  
          <%} else {%>
-            <%- include('./sections/_programsSection' , {pageName: pageName, programs: user.enrolledPrograms, role:user.roll}) -%>  
+            <%- include('./sections/_programsSection' , {pageName: pageName, programs: user.enrolledPrograms, role:user.role}) -%>  
          <% } %>
 
       </div>
@@ -77,4 +77,32 @@
    </div>
 </div>
 <%}%>
+
+<%if(user.role === 'trainer'){%>
+   <%# Comment: Here is for adding a new Program %>
+   <%-include('./partials/_trainerModals', {
+      categories: categories, 
+      modalID:'createProgramModal', 
+      formID: 'createProgramForm', 
+      program: null, 
+      role:user.role
+   })-%> 
+
+   <%# Comment: Here is for updating the created Programs %>
+   <% for(let i = 0; i < programs.length; i++) {%>
+      <%-include('./partials/_trainerModals', {
+         categories: categories, 
+         modalID:'editProgramModal'+programs[i]._id, 
+         formID: 'createProgramForm'+programs[i]._id,
+         program: programs[i], 
+         role:user.role
+      })-%>
+   <% } %>
+
+<%} %>
+
+
+
+
+
 <%-include('./partials/_footer')-%>

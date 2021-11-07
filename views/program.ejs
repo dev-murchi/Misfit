@@ -48,6 +48,13 @@
                       </tr>
                   </tbody>
                </table>
+               <%if(user && user.role === 'member' && !user.enrolledPrograms.includes(program._id)) { %>
+                  
+                  <form method="post" action="/programs/enroll">
+                     <input type="hidden" name="programID" value="<%= program._id %>">
+                     <button type="submit" class="btn btn-lg btn-warning text-white"><i class="fa fa-search-plus mr-1"></i>ENROLL</button>
+                  </form>
+               <% } %>
             </div>
          </div>
          <div class="col-md-7">

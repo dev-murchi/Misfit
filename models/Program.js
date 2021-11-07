@@ -33,7 +33,13 @@ const ProgramSchema = new Schema({
     trainerID: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'User'
-    }
+    },
+    enrolledUsers: [
+        {
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: 'User'
+        }
+    ]
 });
 
 ProgramSchema.pre('validate', function(next) {

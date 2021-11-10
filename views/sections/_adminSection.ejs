@@ -1,0 +1,88 @@
+<div class="col-md-12 mt-2 mb-2">
+    <h2>Users:</h2>
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col"># ID</th>
+            <th scope="col">User Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Role</th>
+            <th scope="col" class="text-center">Update</th>
+            <th scope="col" class="text-center">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+            <%for(let i = 0; i < users.length; i++){ %>
+                <% if( user.email !== users[i].email){ %>
+                    <tr>
+                        <th scope="row"><%= users[i]._id%></th>
+                        <td><%= users[i].name%></td>
+                        <td><%= users[i].email%></td>
+                        <td><%= users[i].role%></td>
+                        <td class="text-center"><a class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a></td>
+                        <td class="text-center"><a class="btn btn-sm btn-danger" href="/users/<%= users[i]._id%>?_method=DELETE" onclick="return confirm('ARE YOU SURE ?')"><i class="fa fa-user-times"></i></a></td>
+                    </tr>
+                <% } %>
+                
+            <%}%>
+            <tr>
+                <th scope="row"><%= user._id%></th>
+                <td><%= user.name%></td>
+                <td><%= user.email%></td>
+                <td><%= user.role%></td>
+            </tr>
+          
+        </tbody>
+    </table>
+</div>
+<div class="col-md-12 mt-2 mb-2">
+    <div class="row">
+        <div class="col-md-6 mb-2 mt-2">
+            <h2>Categories:</h2>
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col"># Category ID</th>
+                    <th scope="col">Category Name</th>
+                    <th scope="col" class="text-center">Update</th>
+                    <th scope="col" class="text-center">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <%for(let i = 0; i < categories.length; i++){ %>
+                        <tr>
+                            <th scope="row"><%= categories[i]._id%></th>
+                            <td><%= categories[i].name%></td>
+                            <td class="text-center"><a class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a></td>
+                            <td class="text-center"><a class="btn btn-sm btn-danger" href="/categories/<%= categories[i]._id%>?_method=DELETE" onclick="return confirm('ARE YOU SURE ?')"><i class="fa fa-trash"></i></a></td>
+                          </tr>
+                    <%}%>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6 mb-2 mt-2">
+            <h2>Proficiencies:</h2>
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col"># Proficiency ID</th>
+                    <th scope="col">Proficiency Name</th>
+                    <th scope="col" class="text-center">Update</th>
+                    <th scope="col" class="text-center">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <%for(let i = 0; i < proficiencies.length; i++){ %>
+                        <tr>
+                            <th scope="row"><%= proficiencies[i]._id%></th>
+                            <td><%= proficiencies[i].name%></td>
+                            <td class="text-center"><a class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a></td>
+                            <td class="text-center"><a class="btn btn-sm btn-danger" href="/proficiency/<%= proficiencies[i]._id%>?_method=DELETE" onclick="return confirm('ARE YOU SURE ?')"><i class="fa fa-trash"></i></a></td>
+                          </tr>
+                    <%}%>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

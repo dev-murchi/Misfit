@@ -27,34 +27,46 @@
                <figure><img src="/images/about.jpg" alt="#" class="rounded"/></figure>
             </div>
          </div>
-         <div class="col-md-5 text-center mb-2 mt-2">
-            <div class="titlepage">
+         <div class="col-md-4 text-center mb-2 mt-2">
+            <div class="titlepage col-md-12">
                
                   <h2><%= user.name%></h2>
                   <p><b>Role: </b><%= user.role%></p>
                   <p><b>Email: </b><%= user.email%></p>
                   <p><b>Phone: </b><%= user.phone%></p>
+                  
+                  <%if(user.role === 'trainer') {%>]
+                     <p><b>Height </b><%= user.height%></p>
+                     <p><b>Weight: </b><%= user.weight%></p>
+                     <p><b>Proficiency: </b><%= user.proficiency%></p>
+                     <p><b>Health Problem: </b><%= user.healtProblem%></p>
+                  <% } else if(user.role === 'member') {%>
+                     <p><b>Height </b><%= user.height%></p>
+                     <p><b>Weight: </b><%= user.weight%></p>
+                     <p><b>Health Problem: </b><%= user.healtProblem%></p>
+                  <% } %>
+                  
                
             </div>
          </div>
-         <div class="col-md-3 my-auto">
-            <div class="row">
+         <div class="col-md-4 my-auto">
+            <div class="col-md-12">
 
-               <button class="col-md-12 btn btn-lg btn-warning rounded-0 text-white mt-2">
+               <button class="col-md-12 btn btn-md btn-outline-misfit rounded-2 mt-2">
                   <span>Update Image</span>
                </button>
-               <button class="col-md-12 btn btn-lg btn-warning rounded-0 text-white mt-2">
+               <button class="col-md-12 btn btn-md btn-outline-misfit rounded-2 mt-2">
                   <span>Update Info</span>
                </button>
                <% if(user.role === 'trainer') {%>
-               <button class="col-md-12 btn btn-lg btn-warning rounded-0 text-white mt-2" data-toggle="modal" data-target="#createProgramModal">
+               <button class="col-md-12 btn btn-md btn-outline-misfit rounded-2 mt-2" data-toggle="modal" data-target="#createProgramModal">
                   <span>CREATE NEW PROGRAM</span>
                </button>
               <%} else if(user.role === 'admin') {%>
-               <button class="col-md-12 btn btn-lg btn-warning rounded-0 text-white mt-2">
+               <button class="col-md-12 btn btn-md btn-outline-misfit rounded-2 mt-2">
                   <span>Add Category</span>
                </button>
-               <button class="col-md-12 btn btn-lg btn-warning rounded-0 text-white mt-2">
+               <button class="col-md-12 btn btn-md btn-outline-misfit rounded-2 mt-2">
                   <span>Add Proficiency</span>
                </button>
                <% } %>
@@ -65,11 +77,11 @@
 
       <div class="row">
          <%if(user.role === 'admin'){%>
-            <%- include('./sections/_programsSection' , {pageName: pageName, programs: programs, role:user.role}) -%>  
+            <%- include('./sections/_adminSection') -%>  
          <%} else if(user.role === 'trainer') {%>
-            <%- include('./sections/_programsSection' , {pageName: pageName, programs: programs, role:user.role}) -%>  
+            <%- include('./sections/_programsSection' , {programs: programs, role:user.role}) -%>  
          <%} else {%>
-            <%- include('./sections/_programsSection' , {pageName: pageName, programs: user.enrolledPrograms, role:user.role}) -%>  
+            <%- include('./sections/_programsSection' , {programs: user.enrolledPrograms, role:user.role}) -%>  
          <% } %>
 
       </div>

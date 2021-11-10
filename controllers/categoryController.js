@@ -1,4 +1,5 @@
 const Category = require('../models/Category');
+const Program = require('../models/Program');
 
 exports.createCategory = async (req, res) => {
     
@@ -17,6 +18,13 @@ exports.createCategory = async (req, res) => {
 exports.deleteCategory= async (req, res) => {
     try {
         
+        const programs = await Program.find({category: req.params.id});
+        console.log('category: programs: ', programs);
+        programs.forEach(async (program) => {
+            program.category = undefined;
+            await program.save();
+        });
+
         await Category.findOneAndDelete({_id: req.params.id});
 
         res.status(200).redirect('/users/dashboard');

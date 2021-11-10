@@ -3,6 +3,7 @@ const {validationResult} = require('express-validator');
 const User = require('../models/User');
 const Category = require('../models/Category');
 const Program = require('../models/Program');
+const Proficiency = require('../models/Proficiency');
 
 exports.createUser = async (req, res) => {
     try{
@@ -78,11 +79,8 @@ exports.deleteUser = async (req, res) => {
     try {
         const user = await User.findByIdAndDelete(req.params.id);
         const program = await Program.deleteMany({trainerID: req.params.id});
-
-        res.status(200).json({
-            user: user,
-            program: program
-        });
+        
+        res.status(200).redirect('/users/dashboard');
 
     } catch (err) {
         res.status(400).json({
@@ -97,14 +95,17 @@ exports.getDashboardPage = async (req, res) => {
     try {
         const user = await User.findOne({_id: req.session.userID}).populate('enrolledPrograms');
         const programs = await Program.find({trainerID: req.session.userID}).sort('-dateCreated');
-        const users = await User.find();
+        const users = await User.find().sort('-dateCreated');
         const categories = await Category.find();
+        const proficiencies = await Proficiency.find();
         
         res.status(200).render('dashboard', {
             pageName: 'dashboard', 
             user: user, 
             programs: programs,
-            categories: categories
+            categories: categories,
+            proficiencies: proficiencies,
+            users: users
         });
     } catch (err) {
         console.log(err.message);

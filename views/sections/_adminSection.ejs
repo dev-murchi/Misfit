@@ -7,7 +7,7 @@
             <th scope="col">User Name</th>
             <th scope="col">Email</th>
             <th scope="col">Role</th>
-            <th scope="col" class="text-center">Update</th>
+            <th scope="col" class="text-center">Info</th>
             <th scope="col" class="text-center">Delete</th>
           </tr>
         </thead>
@@ -19,8 +19,16 @@
                         <td><%= users[i].name%></td>
                         <td><%= users[i].email%></td>
                         <td><%= users[i].role%></td>
-                        <td class="text-center"><a class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a></td>
-                        <td class="text-center"><a class="btn btn-sm btn-danger" href="/users/<%= users[i]._id%>?_method=DELETE" onclick="return confirm('ARE YOU SURE ?')"><i class="fa fa-user-times"></i></a></td>
+                        <td class="text-center">
+                            <a class="btn btn-sm btn-info text-white" data-toggle="modal" data-target="#userInfoModal<%= users[i]._id%>">
+                                <i class="fa fa-info"></i>
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a class="btn btn-sm btn-danger" href="/users/<%= users[i]._id%>?_method=DELETE" onclick="return confirm('ARE YOU SURE ?')">
+                                <i class="fa fa-user-times"></i>
+                            </a>
+                        </td>
                     </tr>
                 <% } %>
                 
@@ -30,6 +38,11 @@
                 <td><%= user.name%></td>
                 <td><%= user.email%></td>
                 <td><%= user.role%></td>
+                <td class="text-center">
+                    <a class="btn btn-sm btn-info text-white" data-toggle="modal" data-target="#userInfoModal<%= user._id%>">
+                        <i class="fa fa-info"></i>
+                    </a>
+                </td>
             </tr>
           
         </tbody>
@@ -53,7 +66,7 @@
                         <tr>
                             <th scope="row"><%= categories[i]._id%></th>
                             <td><%= categories[i].name%></td>
-                            <td class="text-center"><a class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a></td>
+                            <td class="text-center"><a class="btn btn-sm btn-warning" data-toggle="modal" data-target="#updateCategoryModal<%= categories[i]._id%>"><i class="fa fa-edit"></i></a></td>
                             <td class="text-center"><a class="btn btn-sm btn-danger" href="/categories/<%= categories[i]._id%>?_method=DELETE" onclick="return confirm('ARE YOU SURE ?')"><i class="fa fa-trash"></i></a></td>
                           </tr>
                     <%}%>
@@ -76,9 +89,15 @@
                         <tr>
                             <th scope="row"><%= proficiencies[i]._id%></th>
                             <td><%= proficiencies[i].name%></td>
-                            <td class="text-center"><a class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a></td>
-                            <td class="text-center"><a class="btn btn-sm btn-danger" href="/proficiency/<%= proficiencies[i]._id%>?_method=DELETE" onclick="return confirm('ARE YOU SURE ?')"><i class="fa fa-trash"></i></a></td>
-                          </tr>
+                            <% if(proficiencies[i].slug !== 'regular') {%>
+                                <td class="text-center">
+                                    <a class="btn btn-sm btn-warning" data-toggle="modal" data-target="#updateProficiencyModal<%= proficiencies[i]._id%>">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                </td>
+                                <td class="text-center"><a class="btn btn-sm btn-danger" href="/proficiency/<%= proficiencies[i]._id%>?_method=DELETE" onclick="return confirm('ARE YOU SURE ?')"><i class="fa fa-trash"></i></a></td>
+                              </tr>
+                            <% } %>
                     <%}%>
                 </tbody>
             </table>

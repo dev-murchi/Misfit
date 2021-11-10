@@ -1,0 +1,115 @@
+<!-- User Information Modals -->
+
+<% for(let i = 0; i < users.length; i++) {%>
+    <div class="modal fade bd-example-modal-lg" id="userInfoModal<%= users[i]._id%>" tabindex="-1" role="dialog" aria-labelledby="userInfoModal<%= users[i]._id%>ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg border-0">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <div class="titlepage mx-auto">
+                        <h2 class="title mx-auto"> User Information</h2>
+                    </div>
+                    <button type="button" class="btn btn-outline-misfit" data-dismiss="modal"  aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center pb-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-10">
+                                <div id="userInfoForm<%= users[i]._id%>" class="main_form">
+                                    <div class="row">
+                                         <div class="col-sm-12 ">
+                                            <label for="">Name:</label>
+                                            <input class="contactus" placeholder="Name" type="text" name="name" value="<%= users[i].name%>" readonly> 
+                                         </div>                    
+                                         <div class="col-sm-12">
+                                            <label for="">Email:</label>
+                                               <input class="contactus" id="email<%users[i]._id%>" placeholder="Email" type="email" name="email" value="<%= users[i].email%>" readonly> 
+                                         </div>
+                                         <div class="col-sm-12">
+                                            <label for="">Phone:</label>
+                                            <input class="contactus" placeholder="Phone" type="text" name="phone" value="<%= users[i].phone%>" readonly> 
+                                         </div>
+                                         <div class="col-sm-12">
+                                            <label for="">Height:</label>
+                                            <input class="contactus" placeholder="Height in cm" type="number" name="height" value="<%= users[i].height%>" readonly> 
+                                         </div>
+                                         <div class="col-sm-12">
+                                            <label for="">Weight:</label>
+                                            <input class="contactus" placeholder="Weight in kg" type="number" name="weight" value="<%= users[i].weight%>" readonly> 
+                                         </div>
+                                         <div class="col-sm-12">
+                                            <label for="">Health Problem:</label>
+                                            <input class="contactus" placeholder="Health Problem" type="text" name="healthProblem" value="<%= users[i].healthProblem %>" readonly> 
+                                         </div>
+                                         <div class="col-sm-12 ">
+                                            <label for="">Role:</label>
+                                            <select name="role" class="contactus" placeholder="Role" readonly>
+                                               <option value="<%= users[i].role%>" selected><%= users[i].role%></option>
+                                            </select>
+                                         </div>
+                                         <%if(users[i].role === 'trainer') { %>
+                                            <div class="col-sm-12">
+                                                <label for="">Proficiency:</label>
+                                                <input class="contactus" placeholder="Proficiency" type="text" name="proficiency" value="<%=users[i].proficiency.name%>" readonly> 
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+<% } %>
+
+<!-- Category Create Modal -->
+<%- include('./_adminSingleInputFormModal', {
+    modalID: 'createCategoryModal',
+    title: 'Create a Category',
+    formID: 'createCategoryForm',
+    action: '/categories/',
+    inputField: {},
+    placeholder: 'Category Name',
+    buttonText: 'Create'
+}) -%> 
+
+<!-- Category Update Modals -->
+
+<% for(let i = 0; i < categories.length; i++) {%>
+    <%- include('./_adminSingleInputFormModal', {
+        modalID: 'updateCategoryModal' + categories[i]._id,
+        title: 'Update the Category',
+        formID: 'updateCategoryForm' + categories[i]._id,
+        action: '/categories/' + categories[i]._id + '?_method=PUT',
+        inputField: categories[i],
+        placeholder: 'Category Name',
+        buttonText: 'Update'
+    }) -%>   
+<% } %>
+
+<!-- Create Proficiency Modal -->
+<%- include('./_adminSingleInputFormModal', {
+    modalID: 'createProficiencyModal',
+    title: 'Create a Proficiency',
+    formID: 'createProficiencyForm',
+    action: '/proficiency/',
+    inputField: {},
+    placeholder: 'Proficiency Name',
+    buttonText: 'Create'
+}) -%> 
+
+<!-- Proficiencies Update Modals -->
+<% for(let i = 0; i < proficiencies.length; i++) {%>
+    <%- include('./_adminSingleInputFormModal', {
+        modalID: 'updateProficiencyModal' + proficiencies[i]._id,
+        title: 'Update the Proficiency',
+        formID: 'updateProficiencyForm' + proficiencies[i]._id,
+        action: '/proficiency/' + proficiencies[i]._id + '?_method=PUT',
+        inputField: proficiencies[i],
+        placeholder: 'Proficiency Name',
+        buttonText: 'Update'
+    }) -%>   
+<% } %>

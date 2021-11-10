@@ -5,8 +5,8 @@ exports.createCategory = async (req, res) => {
     
     try {
         const category = await Category.create(req.body);
-        // res.status(201).redirect('/users/dashboard');
-        res.status(201).json(category);
+        res.status(201).redirect('/users/dashboard');
+        // res.status(201).json(category);
     } catch (error) {
         res.status(400).json({
             status: 'fail category creation',
@@ -43,7 +43,7 @@ exports.updateCategory = async (req, res) => {
         category.name = req.body.name;
         category.save();
 
-        res.status(200).redirect('/users/dashboard');
+        res.status(201).redirect('/users/dashboard');
     } 
     catch (error) {
         res.status(400).json({

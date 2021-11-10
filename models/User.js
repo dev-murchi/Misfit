@@ -27,7 +27,7 @@ const UserSchema = new Schema({
     phone: {
         type: String,
     },
-    healtProblem: {
+    healthProblem: {
         type: String,
     },
     role: {

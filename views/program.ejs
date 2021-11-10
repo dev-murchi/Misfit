@@ -40,11 +40,19 @@
                       </tr>
                       <tr>
                         <th scope="row">Category:</th>
-                        <td><%= program.category%></td>
+                        <%if(program.category) {%>
+                        <td><%= program.category.name%></td>
+                        <%} else {%>
+                           <td></td>
+                        <%}%>
                       </tr>
                       <tr>
                         <th scope="row">Slug:</th>
                         <td><%= program.slug%></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Trainer:</th>
+                        <td><%= program.trainerID.name%></td>
                       </tr>
                   </tbody>
                </table>

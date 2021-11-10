@@ -8,6 +8,9 @@ const Proficiency = require('../models/Proficiency');
 exports.createUser = async (req, res) => {
     try{
         const user = await User.create(req.body); 
+        defaultProficiency = await Proficiency.findOne({slug: 'regular'});
+        user.proficiency = defaultProficiency;
+        await user.save();
         
         console.log('created user: ',{
             status: 'success',
@@ -93,12 +96,12 @@ exports.deleteUser = async (req, res) => {
 exports.getDashboardPage = async (req, res) => {
     
     try {
-        const user = await User.findOne({_id: req.session.userID}).populate('enrolledPrograms');
+        const user = await User.findOne({_id: req.session.userID}).populate('enrolledPrograms proficiency');
         const programs = await Program.find({trainerID: req.session.userID}).sort('-dateCreated');
-        const users = await User.find().sort('-dateCreated');
+        const users = await User.find().sort('-dateCreated').populate('proficiency');
         const categories = await Category.find();
         const proficiencies = await Proficiency.find();
-        
+        console.log('users: ', users)
         res.status(200).render('dashboard', {
             pageName: 'dashboard', 
             user: user, 
@@ -109,9 +112,33 @@ exports.getDashboardPage = async (req, res) => {
         });
     } catch (err) {
         console.log(err.message);
-        res.status(400).render('dashboard', {
+        res.status(400).json( {
             pageName: 'dashboard',
             message: err.message     
+        });
+    }
+};
+
+exports.updateUser = async (req, res)=>{
+    try {
+        const user = await User.findById(req.params.id);
+        user.name = req.body.name;
+        user.phone = req.body.phone;
+        user.height = req.body.height;
+        user.weight = req.body.weight;
+        user.healthProblem = req.body.healthProblem;
+        
+        if(user.role === 'trainer') {
+            user.proficiency = req.body.proficiency;
+        }
+
+        await user.save();
+
+        res.status(200).redirect('/users/dashboard');
+    } catch (err) {
+        res.status(400).json({
+            status: 'failed',
+            error: err.message
         });
     }
 };

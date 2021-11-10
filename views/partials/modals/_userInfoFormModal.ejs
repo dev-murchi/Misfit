@@ -1,0 +1,75 @@
+<div class="modal fade bd-example-modal-lg" id="<%= modalID %>" tabindex="-1" role="dialog" aria-labelledby="<%= modalID %>ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg border-0">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <div class="titlepage mx-auto">
+                    <h2 class="title mx-auto"> <%= title %></h2>
+                </div>
+                <button type="button" class="btn btn-outline-misfit" data-dismiss="modal"  aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10">
+                            <form id="<%= formID %>" class="main_form" method="post" action="<%= action%>">
+                                <div class="row">
+                                     <div class="col-sm-12 ">
+                                        <label for="">Name:</label>
+                                        <input class="contactus" placeholder="Name" type="text" name="name" value="<%= inputField.name%>" required> 
+                                     </div>                    
+                                     <div class="col-sm-12">
+                                        <label for="">Email:</label>
+                                           <input class="contactus" id="email<%inputField._id%>" placeholder="Email" type="email" name="email" value="<%= inputField.email%>" readonly> 
+                                     </div>
+                                     <div class="col-sm-12">
+                                        <label for="">Phone:</label>
+                                        <input class="contactus" placeholder="Phone" type="text" name="phone" value="<%= inputField.phone%>" required> 
+                                     </div>
+                                     <div class="col-sm-12">
+                                        <label for="">Height:</label>
+                                        <input class="contactus" placeholder="Height in cm" type="number" name="height" value="<%= inputField.height%>" required> 
+                                     </div>
+                                     <div class="col-sm-12">
+                                        <label for="">Weight:</label>
+                                        <input class="contactus" placeholder="Weight in kg" type="number" name="weight" value="<%= inputField.weight%>" required> 
+                                     </div>
+                                     <div class="col-sm-12">
+                                        <label for="">Health Problem:</label>
+                                        <input class="contactus" placeholder="Health Problem" type="text" name="healthProblem" value="<%= inputField.healthProblem %>" required> 
+                                     </div>
+                                     <div class="col-sm-12 ">
+                                        <label for="">Role:</label>
+                                        <select name="role" class="contactus" placeholder="Role" required>
+                                           <option value="<%= inputField.role%>" selected><%= inputField.role%></option>
+                                        </select>
+                                     </div>
+                                     <%if(inputField.role === 'trainer') { %>
+                                        <div class="col-sm-12">
+                                            <label for="">Proficiency:</label>
+                                            <select name="proficiency" class="contactus" placeholder="Role" required>
+                                                <% for(let i = 0; i < proficiencies.length; i++) {%>
+                                                    <% if(inputField.proficiency.slug === proficiencies[i].slug){ %>
+                                                        <option value="<%= proficiencies[i]._id%>" selected><%= proficiencies[i].name%></option>
+                                                    <%}else{%>
+                                                        <option value="<%= proficiencies[i]._id%>"><%= proficiencies[i].name%></option>
+                                                    <%}%>
+                                                <% } %>
+                                            </select>
+                                            
+                                        </div>
+                                    <% } %>
+                                    <div class="col-md-12">
+                                        <button class="btn btn-warning px-4 mb-2 mt-1 mr-2 ml-2" type="submit" > <i class="fa fa-plus-square mr-1"></i>UPDATE</button>
+                                        <button class="btn btn-danger px-4 mb-2 mt-1 mr-2 ml-2" type="reset" > <i class="fa fa-minus-circle mr-1"></i>CANCEL</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

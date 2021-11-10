@@ -38,12 +38,12 @@
                   <%if(user.role === 'trainer') {%>]
                      <p><b>Height </b><%= user.height%></p>
                      <p><b>Weight: </b><%= user.weight%></p>
-                     <p><b>Proficiency: </b><%= user.proficiency%></p>
-                     <p><b>Health Problem: </b><%= user.healtProblem%></p>
+                     <p><b>Proficiency: </b><%= user.proficiency.name%></p>
+                     <p><b>Health Problem: </b><%= user.healthProblem%></p>
                   <% } else if(user.role === 'member') {%>
                      <p><b>Height </b><%= user.height%></p>
                      <p><b>Weight: </b><%= user.weight%></p>
-                     <p><b>Health Problem: </b><%= user.healtProblem%></p>
+                     <p><b>Health Problem: </b><%= user.healthProblem%></p>
                   <% } %>
                   
                
@@ -55,7 +55,7 @@
                <button class="col-md-12 btn btn-md btn-outline-misfit rounded-2 mt-2">
                   <span>Update Image</span>
                </button>
-               <button class="col-md-12 btn btn-md btn-outline-misfit rounded-2 mt-2">
+               <button class="col-md-12 btn btn-md btn-outline-misfit rounded-2 mt-2" data-toggle="modal" data-target="#updateUserInfoModal">
                   <span>Update Info</span>
                </button>
                <% if(user.role === 'trainer') {%>
@@ -63,10 +63,10 @@
                   <span>CREATE NEW PROGRAM</span>
                </button>
               <%} else if(user.role === 'admin') {%>
-               <button class="col-md-12 btn btn-md btn-outline-misfit rounded-2 mt-2">
+               <button class="col-md-12 btn btn-md btn-outline-misfit rounded-2 mt-2" data-toggle="modal" data-target="#createCategoryModal">
                   <span>Add Category</span>
                </button>
-               <button class="col-md-12 btn btn-md btn-outline-misfit rounded-2 mt-2">
+               <button class="col-md-12 btn btn-md btn-outline-misfit rounded-2 mt-2" data-toggle="modal" data-target="#createProficiencyModal">
                   <span>Add Proficiency</span>
                </button>
                <% } %>
@@ -90,9 +90,10 @@
 </div>
 <%}%>
 
+<!-- Trainer Modals -->
 <%if(user.role === 'trainer'){%>
    <%# Comment: Here is for adding a new Program %>
-   <%-include('./partials/_trainerModals', {
+   <%-include('./partials/modals/_trainerModals', {
       categories: categories, 
       modalID:'createProgramModal', 
       formID: 'createProgramForm', 
@@ -102,7 +103,7 @@
 
    <%# Comment: Here is for updating the created Programs %>
    <% for(let i = 0; i < programs.length; i++) {%>
-      <%-include('./partials/_trainerModals', {
+      <%-include('./partials/modals/_trainerModals', {
          categories: categories, 
          modalID:'editProgramModal'+programs[i]._id, 
          formID: 'createProgramForm'+programs[i]._id,
@@ -113,6 +114,17 @@
 
 <%} %>
 
+<!-- Admin Modals -->
+<%- include('./partials/modals/_adminModals') -%>
+
+<!-- Update User Info Modals -->
+<%- include('./partials/modals/_userInfoFormModal', {
+   modalID: 'updateUserInfoModal',
+   title: 'User Information',
+   formID: 'updateUserInfoForm',
+   action: '/users/'+ user._id + '?_method=PUT',
+   inputField: user 
+}) -%>
 
 
 

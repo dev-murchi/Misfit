@@ -11,6 +11,7 @@ const programRoute = require('./routes/programRoute');
 const categoryRoute = require('./routes/categoryRoute'); 
 const userRoute = require('./routes/userRoute');
 const proficiencyRoute = require('./routes/proficiencyRoute');
+const Proficiency = require('./models/Proficiency');
 
 
 const mongoUrl = 'mongodb://localhost/misfit-project-db2';
@@ -52,15 +53,21 @@ app.use('/proficiency', proficiencyRoute);
 
 const PORT = process.env.PORT || 3001;
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
     console.log(`Server is started on port: ${PORT} and connecting to Mongo DB...`);
-    // Conenct DB
-    mongoose.connect(mongoUrl,{ 
+    try {
+        // Conenct DB
+    await mongoose.connect(mongoUrl,{ 
         useNewUrlParser: true,
         useUnifiedTopology: true
-    }).then(() => {
-        console.log('DB Connected Successfully!')
-    }).catch((error) => {
-        console.log(error);
     });
+    let defaultProficiency = await Proficiency.findOne({slug: 'regular'});
+    if(!defaultProficiency) {
+        defaultProficiency = await Proficiency.create({name: 'Regular'});
+    }
+    console.log(`Default trainer proficiency: ${defaultProficiency.name}`);
+    console.log('DB Connected Successfully!')
+    } catch (err) {
+        console.error(err.message)
+    }
 });

@@ -33,7 +33,7 @@ exports.getAllPrograms = async (req, res) => {
 };
 exports.getSingleProgramPage = async (req, res) => {
 
-    const program = await Program.findOne({slug: req.params.slug});
+    const program = await Program.findOne({slug: req.params.slug}).populate('category trainerID');
     const user = await User.findById(req.session.userID);
     res.render('program', {
         program: program,

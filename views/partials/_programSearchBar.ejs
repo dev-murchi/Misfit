@@ -5,21 +5,28 @@
           <!-- <p>The point of using Lorem Ipsum is that it has a more-or-less</p> -->
           <nav class="navbar navbar-light mx-auto mt-0">
              <div class="col-md-12 navbar mx-auto" >
-                <form class="form-inline mx-auto mb-4">
+                <form class="form-inline mx-auto mb-4" method="get" action="/programs">
                       
-                      <input class="form-control mr-sm-2 mx-auto mt-1 mb-1" type="search" placeholder="Search" aria-label="Search">
-                      <button class="btn btn-outline-success my-2 my-sm-0 mr-sm-2 mx-auto mt-1 mb-1" type="button">
+                      <input class="form-control mr-sm-2 mx-auto mt-1 mb-1" name="search" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-outline-success my-2 my-sm-0 mr-sm-2 mx-auto mt-1 mb-1" type="submit">
                          <i class="fa fa-search mr-1"></i>
                          Search
                       </button>
                       <select class="form-control mr-sm-2 mt-1 mb-1" id="antrenmanCategorySelect" onchange="displayAntrenmanCategory()">
-                         <option disabled selected> Category List</option>
-                         <option value="1">1</option>
-                         <option value="2">2</option>
-                         <option value="3">3</option>
-                         <option value="4">4</option>
-                         <option value="5">5</option>
+                        <% if(categorySlug === '__CategoryList__') { %>
+                           <option value="__CategoryList__" selected>Category List</option>
+                        <% } else { %>
+                           <option value="getAll" >Category List</option>
+                        <%}%>
+                         <% for(let i = 0; i < categories.length; i++) { %>
+                           <% if(categorySlug === categories[i].slug) { %>
+                              <option value="<%= categories[i].slug %>" selected><%= categories[i].name%></option>
+                           <% } else { %>
+                              <option value="<%= categories[i].slug %>"><%= categories[i].name%></option>
+                           <%}%>
+                         <%}%>
                       </select>
+                      <a href="" id="categorySearchLink" type="hidden"></a>
                  </form>
              </div>
           </nav>

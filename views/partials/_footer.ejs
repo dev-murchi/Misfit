@@ -59,8 +59,16 @@
      <script>
          function displayAntrenmanCategory(){
             const antrenmanCategory = document.getElementById('antrenmanCategorySelect');
-            console.log('antrenmanCategory: ', antrenmanCategory.value);
-            antrenmanCategory.selectedIndex = 0;
+            
+            categoryLink = document.getElementById('categorySearchLink');
+            
+            if(antrenmanCategory.selectedIndex === 0) {
+               categoryLink.href = '/programs';
+            }
+            else {
+               categoryLink.href = '/programs?categories='+antrenmanCategory.value;
+            }
+            categoryLink.click();
          }
 
          function clearFormData(formID) {

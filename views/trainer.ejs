@@ -1,19 +1,54 @@
 <%- include('./partials/_header') -%>
-<%- include('./partials/_navigation' , {pageName: pageName}) -%>
+<%- include('./partials/_navigation',  {pageName: pageName}) -%>
 
-<% if(trainers){ %>
-   <div class="back_re">
-      <div class="container">
-         <div class="row">
-            <div class="col-md-12">
-               <div class="title">
-                  <h2>Our Trainers</h2>
-               </div>
+<% if(trainer) {%>
+<div class="back_re">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="title">
+               <h2>Our Trainers</h2>
             </div>
          </div>
       </div>
+   </div>
+</div>
+   
+<div class="about">
+   <div class="container">
+      <div class="row d_flex">
+         <div class="col-md-4">
+            <div class="about_img">
+               <figure><img src="/images/about.jpg" alt="#"/></figure>
+            </div>
+         </div>
+         <div class="col-md-6">
+            <table class="table table-borderless">
+                  <tbody>
+                      <tr>
+                        <th scope="row">Name:</th>
+                        <td><%= trainer.name%></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Email:</th>
+                        <td><%= trainer.email %></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Phone:</th>
+                        <td><%= trainer.phone%></td>
+                      </tr>
+                      <tr>
+                         <th>Proficiency:</th>
+                         <td><%= trainer.proficiency.name%></td>
+                      </tr>
+                  </tbody>
+               </table>
+         </div>
+         
       </div>
-      
-      <%- include('./sections/_trainersSection' , {pageName: 'trainer', trainers: trainers}) -%> 
-<%}%>
+   </div>
+</div>
+
+<% } %>
+    
 <%-include('./partials/_footer')-%>

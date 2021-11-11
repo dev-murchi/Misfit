@@ -101,7 +101,6 @@ exports.getDashboardPage = async (req, res) => {
         const users = await User.find().sort('-dateCreated').populate('proficiency');
         const categories = await Category.find();
         const proficiencies = await Proficiency.find();
-        console.log('users: ', users)
         res.status(200).render('dashboard', {
             pageName: 'dashboard', 
             user: user, 

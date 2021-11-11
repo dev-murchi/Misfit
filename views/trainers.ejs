@@ -1,0 +1,19 @@
+<%- include('./partials/_header') -%>
+<%- include('./partials/_navigation' , {pageName: pageName}) -%>
+
+<% if(trainers){ %>
+   <div class="back_re">
+      <div class="container">
+         <div class="row">
+            <div class="col-md-12">
+               <div class="title">
+                  <h2>Our Trainers</h2>
+               </div>
+            </div>
+         </div>
+      </div>
+      </div>
+      
+      <%- include('./sections/_trainersSection' , {pageName: 'trainer', trainers: trainers}) -%> 
+<%}%>
+<%-include('./partials/_footer')-%>

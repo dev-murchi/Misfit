@@ -1,5 +1,6 @@
 const Program = require('../models/Program');
 const User = require('../models/User');
+const Category = require('../models/Category');
 
 exports.createProgram = async (req, res) => {
     try {
@@ -22,14 +23,56 @@ exports.createProgram = async (req, res) => {
 };
 
 exports.getAllPrograms = async (req, res) => {
-    
-    const programs = await Program.find().sort('-dateCreated');
+    try {
+        console.log('req.query: ', req.query);
+        console.log('selected index: ', req.query.index);
+        let categorySlug = req.query.categories;
+        const query = req.query.search;
 
-    // res.status(200).json(programs);
-    res.render('programs', {
-        programs: programs,
-        pageName: 'programs'
-    });
+        const category = await Category.findOne({slug:categorySlug})
+        console.log('category: ', category)
+
+        let filter = {};
+    
+        if(categorySlug) {
+          filter = {category:category._id}
+        }
+    
+        if(query) {
+          filter = {name:query}
+        }
+    
+        if(!query && !categorySlug) {
+          filter.name = "",
+          filter.category = null
+          categorySlug = '__CategoryList__'
+        }
+
+
+        const programs = await Program.find({
+            $or:[
+              {
+                  name: { $regex: '.*' + filter.name + '.*', $options: 'i'}
+              },
+              {category: filter.category}
+            ]
+          }).sort('-dateCreated').populate('trainerID');
+          console.log('programs: ', programs);
+
+        const categories = await Category.find();
+        
+        res.render('programs', {
+            programs: programs,
+            pageName: 'programs',
+            categories: categories,
+            categorySlug: categorySlug
+        });
+    } catch (err) {
+        res.status(400).json({
+            status: 'failed',
+            error: err.message
+        });
+    }
 };
 exports.getSingleProgramPage = async (req, res) => {
 

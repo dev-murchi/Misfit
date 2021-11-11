@@ -1,0 +1,35 @@
+<div class="modal fade bd-example-modal-lg" id="updateProfilePhotoModal" tabindex="-1" role="dialog" aria-labelledby="updateProfilePhotoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg border-0">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <div class="titlepage mx-auto">
+                    <h2 class="title mx-auto">Update Profile Photo</h2>
+                </div>
+                <button type="button" class="btn btn-outlined-misfit" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center pb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10 mt-2">
+                            <form id="updateProfilePhotoForm" class="main_form" method="post" action="/users/photo/<%= user._id%>" enctype="multipart/form-data">
+                                <div class="col-md-12 mb-2">
+                                    <input type="file" id="profilePhotoInputModal" name="image" onchange="PreviewImage('profilePhotoImageModal');" data-buttonText="Your label here." class="img-fluid d-block mx-0 rounded-0 ">
+                                </div>
+                                <div class="col-lg-6 mx-auto mt-2 mb-2">
+                                    <img src="<%= user.image%>" id="profilePhotoImageModal" alt="" srcset="">
+                                </div>
+                                <div class="col-md-12 modal-footer">
+                                    <button class="btn btn-warning px-4 mb-2 mt-1 mr-2 ml-2" type="submit" > <i class="fa fa-plus-square mr-1"></i>UPDATE</button>
+                                    <button class="btn btn-danger px-4 mb-2 mt-1 mr-2 ml-2" type="reset" onclick="PreviewImage('profilePhotoImageModal', true);"> <i class="fa fa-minus-circle mr-1"></i>CANCEL</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

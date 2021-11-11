@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const methodOverride = require('method-override');
+const fileUpload = require('express-fileupload');
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use(session({
         mongoUrl: mongoUrl
     })
 }));
+app.use(fileUpload());
 app.use('*', (req, res, next) => {
     userIn = req.session.userID;
     next();

@@ -42,7 +42,10 @@ const UserSchema = new Schema({
     enrolledPrograms: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Program'
-    }]
+    }],
+    image: {
+        type: String
+    }
 });
 
 UserSchema.pre('save', function(next) {

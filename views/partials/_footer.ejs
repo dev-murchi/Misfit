@@ -118,6 +118,19 @@
             
             programStep += 1;
          }
+
+         function PreviewImage(imageID, imageClear = false) {
+            if(imageClear === true){
+                  document.getElementById(imageID).src = "";
+            }
+            else {
+                  let oFReader = new FileReader();
+                  oFReader.readAsDataURL(document.getElementById('profilePhotoInputModal').files[0]);
+                  oFReader.onload = function (oFREvent) {
+                     document.getElementById(imageID).src = oFREvent.target.result;
+                  };
+            } 
+         };
      </script>
   </body>
 </html>

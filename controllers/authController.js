@@ -1,3 +1,4 @@
+const fs = require('fs');
 const bcrypt = require('bcrypt');
 const {validationResult} = require('express-validator');
 const User = require('../models/User');
@@ -10,6 +11,7 @@ exports.createUser = async (req, res) => {
         const user = await User.create(req.body); 
         defaultProficiency = await Proficiency.findOne({slug: 'regular'});
         user.proficiency = defaultProficiency;
+        user.image = "/uploads/default-user-photo.png"
         await user.save();
         
         console.log('created user: ',{
@@ -138,6 +140,42 @@ exports.updateUser = async (req, res)=>{
         res.status(400).json({
             status: 'failed',
             error: err.message
+        });
+    }
+};
+
+exports.addProfilePhoto = async (req, res) => {
+    try {
+
+        const uploadDir = 'public/uploads';
+
+        if (!fs.existsSync(uploadDir)) {
+            fs.mkdirSync(uploadDir);
+        }
+
+        let uploadPath =  __dirname + '/../public/uploads/';
+        let imagePath = '';
+
+        if(req.files){
+            uploadPath += req.files.image.name;
+            imagePath = '/uploads/'+req.files.image.name;
+        }
+        
+        const user = await User.findById(req.params.id);
+
+        if(req.files){
+            user.image= imagePath;
+            await req.files.image.mv(uploadPath);
+        }
+
+        await user.save();
+
+        res.status(200).redirect('/users/dashboard');
+
+    } catch (err) {
+        console.error(err);
+        res.status(400).json({
+            status: 'failed'
         });
     }
 };

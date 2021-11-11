@@ -6,7 +6,7 @@ exports.createProgram = async (req, res) => {
     try {
         const program = await Program.create({
             name: req.body.name,
-            description: req.body.description,
+            content: req.body.content,
             category: req.body.category,
             trainerID: req.session.userID,
             recommendedWeek: req.body.recommendedWeek

@@ -57,6 +57,7 @@
         baguetteBox.run('.tz-gallery');
      </script> -->
      <script>
+         let programStep = 0;
          function displayAntrenmanCategory(){
             const antrenmanCategory = document.getElementById('antrenmanCategorySelect');
             
@@ -73,6 +74,49 @@
 
          function clearFormData(formID) {
             document.getElementById(formID).reset();
+         }
+
+         function addProgramContent(){
+            let programStepId = 'programStep_'+programStep;
+            console.log('addProgramContent button pressed');
+            const programContentField = document.getElementById('addProgramContentField');
+            
+            const inputGroupDiv = document.createElement('div');
+            const inputGroupPrependDiv = document.createElement('div');
+            const btnEl = document.createElement('button');
+            const spanEl = document.createElement('span');
+            const iTagEl = document.createElement('i');
+            const inputField = document.createElement('input');
+
+            // set attribute
+            iTagEl.setAttribute('class', 'fa fa-trash');
+            spanEl.setAttribute('aria-hidden', 'true');
+            btnEl.setAttribute('class', 'btn program-content-delete-btn');
+            btnEl.setAttribute('onclick', '')
+            inputGroupPrependDiv.setAttribute('class', 'input-group-prepend');
+            inputField.setAttribute('type', 'text');
+            inputField.setAttribute('class', 'form-control program-content');
+            inputField.setAttribute('placeholder', 'Program Content');
+            inputField.setAttribute('name', 'content');
+            inputField.required = true;
+            inputGroupDiv.setAttribute('class', 'input-group mb-3');
+            inputGroupDiv.setAttribute('id', programStepId);
+
+            // clear btn functionality
+            btnEl.addEventListener('click', ()=>{
+               document.getElementById(programStepId).remove();
+            });
+
+            // append child
+            spanEl.appendChild(iTagEl);
+            btnEl.appendChild(spanEl);
+            inputGroupPrependDiv.appendChild(btnEl);
+            inputGroupDiv.appendChild(inputGroupPrependDiv);
+            inputGroupDiv.appendChild(inputField);
+
+            programContentField.appendChild(inputGroupDiv);
+            
+            programStep += 1;
          }
      </script>
   </body>

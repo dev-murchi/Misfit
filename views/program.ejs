@@ -18,43 +18,47 @@
    <div class="container">
       <div class="row d_flex">
          
-         <div class="col-md-8">
-            <table class="table table-borderless">
-               <tbody>
-                  <tr>
-                     <th scope="row">ID:</th>
-                     <td><%= program._id%></td>
-                   </tr>
-                   <tr>
-                     <th scope="row">Name:</th>
-                     <td><%= program.name%></td>
-                   </tr>
-                   <tr>
-                     <th scope="row">Description:</th>
-                     <td><%= program.description%></td>
-                   </tr>
-                   <tr>
-                     <th scope="row">Recommended Week:</th>
-                     <td><%= program.recommendedWeek %></td>
-                   </tr>
-                   <tr>
-                     <th scope="row">Category:</th>
-                     <%if(program.category) {%>
-                     <td><%= program.category.name%></td>
-                     <%} else {%>
-                        <td></td>
-                     <%}%>
-                   </tr>
-                   <tr>
-                     <th scope="row">Slug:</th>
-                     <td><%= program.slug%></td>
-                   </tr>
-                   <tr>
-                     <th scope="row">Trainer:</th>
-                     <td><%= program.trainerID.name%></td>
-                   </tr>
-               </tbody>
-            </table>
+         <div class="col-md-8 mb-2 mt-2">
+            <ol>
+               <li class="row  mb-2">
+                  <div class="col-sm-6">
+                     <h3>
+                        <b>Program Contents:</b>
+                     </h3>
+                  </div>
+                  <div class="col-sm-6">
+                        <% for(let i =0; i < program.content.length; i++){ %>
+                           <h3>* <%= program.content[i]%></h3>
+                        <% } %>
+                  </div>
+               </li>
+               <li class="row mb-2">
+                  <div class="col-sm-6">
+                     <h3><b>Recommended Week:</b></h3> 
+                  </div>
+                  <div class="col-sm-6">
+                     <h3><%= program.recommendedWeek%></h3>
+                  </div>
+               </li>
+               <li class="row  mb-2">
+                  <div class="col-sm-6">
+                     <h3><b>Category:</b></h3>
+                  </div>
+                  <div class="col-sm-6">
+                     <% if(program.category){ %>
+                        <h3><%= program.category.name%></h3>
+                     <% } %>
+                  </div>
+               </li>
+               <li class="row mb-2">
+                  <div class="col-sm-6">
+                     <h3><b>Trainer:</b></h3>
+                  </div>
+                  <div class="col-sm-6">
+                    <h3><%= program.trainerID.name%></h3>
+                  </div>
+               </li>
+            </ol>
             <%if(user && user.role === 'member' && !user.enrolledPrograms.includes(program._id)) { %>
                
                <form method="post" action="/programs/enroll">
@@ -63,7 +67,7 @@
                </form>
             <% } %>
          </div>
-         <div class="col-md-4">
+         <div class="col-md-4 mb-2 mt-2">
             <div class="about_img">
                <figure><img src="/images/about.jpg" alt="#"/></figure>
             </div>

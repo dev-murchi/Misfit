@@ -1,11 +1,11 @@
 <!-- gallery -->
 
-<% if(programs && programs.length !== 0) { %>
-   <div  class="gallery col-md-12" >
-      <div class="container">
-         <% if(pageName === 'programs') {%>
-            <%- include('../partials/_programSearchBar.ejs') -%>
+<div  class="gallery col-md-12" >
+   <div class="container">
+      <% if(pageName === 'programs') {%>
+         <%- include('../partials/_programSearchBar.ejs') -%>
          <% } %>
+         <% if(programs && programs.length !== 0) { %>
          <div class="row">
             <div class="col-sm-12">
                <div class="row">
@@ -38,9 +38,10 @@
                   
                </div>
             </div>
-         </div>      
+         </div>
+         <% } %>
+
       </div>
    </div> 
    
-<% } %>
 <!-- end gallery -->

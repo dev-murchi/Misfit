@@ -10,11 +10,12 @@ const ProgramSchema = new Schema({
         trim: true,
         required: true
     },
-    description: {
-        type: String,
-        trim:true,
-        required: true  
-    },
+    content: [
+        {
+            type: String,
+            trim: true
+        },
+    ],
     recommendedWeek: {
         type: Number,
     },

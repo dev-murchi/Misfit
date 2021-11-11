@@ -72,14 +72,31 @@
                                                 <input class="contactus" placeholder="Recommended Week" type="number" name="recommendedWeek" > 
                                             </div>
                                             
-                                            <div class="col-md-12">
-                                                <textarea class="textarea" placeholder="Description" type="text" name="description"></textarea>
+                                            <div class="col-md-12" id="addProgramContentField">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                      <button type="button" title="Delete Content" class="btn program-content-delete-btn" data-dismiss="modal">
+                                                            <span aria-hidden="true"><i class="fa fa-trash"></i></span>
+                                                        </button>
+                                                    </div>
+                                                    <input name="content" type="text" class="form-control program-content" placeholder="Program Content" aria-label="" aria-describedby="basic-addon1" required>
+                                                </div>
                                             </div>
 
-                                            <div class="col-md-12">
-                                                <button class="btn btn-warning px-4 mb-2 mt-1 mr-2 ml-2" type="submit" > <i class="fa fa-plus-square mr-1"></i>ADD</button>
-                                                <button class="btn btn-danger px-4 mb-2 mt-1 mr-2 ml-2" type="reset" data-dismiss="modal"> <i class="fa fa-search-plus mr-1"></i>CANCEL</button>
+                                            <div class="col-md-12 mb-3">
+                                                <button type="button" title="Delete Content" class="btn btn-outline-misfit" onclick="addProgramContent()">
+                                                    <span aria-hidden="true">Add Program Content</span>
+                                                </button>
                                             </div>
+                                            
+                                            
+                                            <div class="modal-footer col-md-12">
+                                                <div class="col-md-12 mt-3">
+                                                    <button class="btn btn-warning px-4 mb-2 mt-1 mr-2 ml-2" type="submit" > <i class="fa fa-plus-square mr-1"></i>ADD</button>
+                                                    <button class="btn btn-danger px-4 mb-2 mt-1 mr-2 ml-2" type="reset" data-dismiss="modal"> <i class="fa fa-search-plus mr-1"></i>CANCEL</button>
+                                                </div>
+                                            </div>
+                                            
                                             
                                         </div>
                                     </form>

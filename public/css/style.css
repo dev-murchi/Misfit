@@ -1031,3 +1031,25 @@ ul.link_menu li a {
      background-color: #022c53;
      border-color: #022c53;
    }
+
+   .program-content {
+     padding: 0 15px;
+     margin-bottom: 25px;
+     height: 50px;
+     background: #fff;
+     color: #00274a;
+     font-size: 16px;
+     font-weight: normal;
+     border-radius: 10px;
+     border: #0f98f8 solid 1px;
+   }
+   .program-content:focus{
+     border: #0f98f8 solid 1px !important;
+   }
+   .program-content-delete-btn{
+     color: #fff;
+     background-color: #022c53;
+     border-color: #022c53;
+   }
+
+   

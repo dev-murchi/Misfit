@@ -420,7 +420,7 @@ button {
 .titlepage h2::before {
      position: relative;
      content: "";
-     background-color: #00274a;
+     /* background-color: #00274a; */
      width: 100px;
      height: 5px;
      top: 55px;

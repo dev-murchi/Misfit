@@ -39,9 +39,6 @@ exports.getTrainerSinglePage = async (req, res) => {
     }
 };
 
-exports.getContactPage = (req, res) => {
-    res.render('contact');
-};
 exports.getLoginPage = (req, res) => {
     res.render('login');
 };

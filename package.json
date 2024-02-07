@@ -1,6 +1,6 @@
 {
   "name": "misfitproject",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Patika.dev Misfit Project",
   "main": "app.js",
   "scripts": {
